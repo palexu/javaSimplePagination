@@ -1,18 +1,25 @@
 package com.bean;
 
 public class Student {
-	String stu_id;
+	String id;
 	String name;
-	String sex;
-	String speciality;
-	String schoolYear;
-	String tel;
-	String email;
-	public String getStu_id() {
-		return stu_id;
+	String gender;
+	String age;
+	String origin;
+	String area;
+	String credit;
+	String claId;
+	public String getClaId() {
+		return claId;
 	}
-	public void setStu_id(String stu_id) {
-		this.stu_id = stu_id;
+	public void setClaId(String claId) {
+		this.claId = claId;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
 	}
 	public String getName() {
 		return name;
@@ -20,35 +27,35 @@ public class Student {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getSex() {
-		return sex;
+	public String getGender() {
+		return gender;
 	}
-	public void setSex(String sex) {
-		this.sex = sex;
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
-	public String getSpeciality() {
-		return speciality;
+	public String getAge() {
+		return age;
 	}
-	public void setSpeciality(String speciality) {
-		this.speciality = speciality;
+	public void setAge(String age) {
+		this.age = age;
 	}
-	public String getSchoolYear() {
-		return schoolYear;
+	public String getOrigin() {
+		return origin;
 	}
-	public void setSchoolYear(String schoolYear) {
-		this.schoolYear = schoolYear;
+	public void setOrigin(String origin) {
+		this.origin = origin;
 	}
-	public String getTel() {
-		return tel;
+	public String getArea() {
+		return area;
 	}
-	public void setTel(String tel) {
-		this.tel = tel;
+	public void setArea(String area) {
+		this.area = area;
 	}
-	public String getEmail() {
-		return email;
+	public String getCredit() {
+		return credit;
 	}
-	public void setEmail(String email) {
-		this.email = email;
+	public void setCredit(String credit) {
+		this.credit = credit;
 	}
 	
 }

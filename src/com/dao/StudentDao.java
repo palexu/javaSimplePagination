@@ -5,78 +5,58 @@ import java.util.ArrayList;
 
 import com.bean.Student;
 
+/**
+ * 
+ * @author xj
+ *
+ */
 public class StudentDao extends BaseDao {
-	// 分页限制
-	private String limitStart = "0";
-	private String limitNum = "20";
-	private String sqlLimit = " limit 0,20";
-	private String orderBy = " order by stu_id ASC ";
 
-	public void setSqlLimit(String start, String num) {
-		sqlLimit = " limit " + start + "," + num;
-	}
+//	public int total() {
+//		String sql = "select COUNT(*) from students";
+//		try (Connection conn = dataSource.getConnection(); Statement st = conn.prepareStatement(sql)) {
+//			ResultSet rs = st.executeQuery(sql);
+//			while (rs.next()) {
+//				return Integer.parseInt(rs.getString(1));
+//			}
+//		} catch (SQLException se) {
+//			se.printStackTrace();
+//		}
+//		return -1;
+//	}
 
-	public void setLimitStart(String start) {
-		sqlLimit = " limit " + start + "," + limitNum;
-	}
+//	public int total(String searchKey) {
+//		String sql = "SELECT count(*)"
+//				+ " FROM students WHERE stu_id like ? or name like ? or sex like ? or schoolYear like ? or speciality like ? ";
+//		try (Connection conn = dataSource.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+//			pstmt.setString(1, "%" + searchKey + "%");
+//			pstmt.setString(2, "%" + searchKey + "%");
+//			pstmt.setString(3, "%" + searchKey + "%");
+//			pstmt.setString(4, "%" + searchKey + "%");
+//			pstmt.setString(5, "%" + searchKey + "%");
+//			try (ResultSet rst = pstmt.executeQuery()) {
+//				if (rst.next()) {
+//					return Integer.parseInt(rst.getString(1));
+//				}
+//			}
+//		} catch (SQLException se) {
+//			se.printStackTrace();
+//			return -1;
+//		}
+//		return -1;
+//	}
 
-	public void setLimitNum(String num) {
-		sqlLimit = " limit " + limitStart + "," + num;
-	}
-
-	public String getLimitStart() {
-		return limitStart;
-	}
-
-	public String getLimitNum() {
-		return limitNum;
-	}
-
-	public int total() {
-		String sql = "select COUNT(*) from students";
-		try (Connection conn = dataSource.getConnection(); Statement st = conn.prepareStatement(sql)) {
-			ResultSet rs = st.executeQuery(sql);
-			while (rs.next()) {
-				return Integer.parseInt(rs.getString(1));
-			}
-		} catch (SQLException se) {
-			se.printStackTrace();
-		}
-		return -1;
-	}
-
-	public int total(String searchKey) {
-		String sql = "SELECT count(*)"
-				+ " FROM students WHERE stu_id like ? or name like ? or sex like ? or schoolYear like ? or speciality like ? ";
-		try (Connection conn = dataSource.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
-			pstmt.setString(1, "%" + searchKey + "%");
-			pstmt.setString(2, "%" + searchKey + "%");
-			pstmt.setString(3, "%" + searchKey + "%");
-			pstmt.setString(4, "%" + searchKey + "%");
-			pstmt.setString(5, "%" + searchKey + "%");
-			try (ResultSet rst = pstmt.executeQuery()) {
-				if (rst.next()) {
-					return Integer.parseInt(rst.getString(1));
-				}
-			}
-		} catch (SQLException se) {
-			se.printStackTrace();
-			return -1;
-		}
-		return -1;
-	}
-
-	// 插入一条客户记录
 	public boolean addStudent(Student student) {
-		String sql = "INSERT INTO students" + "(stu_id,name,sex,speciality,schoolYear,tel,email)VALUES(?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO xujy_Students" + "(xjy_id,xjy_name,xjy_gender,xjy_age,xjy_origin,xjy_area,xjy_credit,xjy_claId)VALUES(?,?,?,?,?,?,?,?)";
 		try (Connection conn = dataSource.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
-			pstmt.setString(1, student.getStu_id());
+			pstmt.setString(1, student.getId());
 			pstmt.setString(2, student.getName());
-			pstmt.setString(3, student.getSex());
-			pstmt.setString(4, student.getSpeciality());
-			pstmt.setString(5, student.getSchoolYear());
-			pstmt.setString(6, student.getTel());
-			pstmt.setString(7, student.getEmail());
+			pstmt.setString(3, student.getGender());
+			pstmt.setString(4, student.getAge());
+			pstmt.setString(5, student.getOrigin());
+			pstmt.setString(6, student.getArea());
+			pstmt.setString(7, student.getCredit());
+			pstmt.setString(8, student.getClaId());
 			pstmt.executeUpdate();
 			return true;
 		} catch (SQLException se) {
@@ -85,53 +65,53 @@ public class StudentDao extends BaseDao {
 		}
 	}
 
-	// 按姓名检索客户记录，模糊查询
-	public ArrayList<Student> findByKeyword(String searchKey) {
+//	public ArrayList<Student> findByKeyword(String searchKey) {
+//
+//		ArrayList<Student> stuList = new ArrayList<Student>();
+//		String sql = "SELECT *"
+//				+ " FROM students WHERE stu_id like ? or name like ? or sex like ? or schoolYear like ? or speciality like ? "
+//				;
+//		try (Connection conn = dataSource.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+//			pstmt.setString(1, "%" + searchKey + "%");
+//			pstmt.setString(2, "%" + searchKey + "%");
+//			pstmt.setString(3, "%" + searchKey + "%");
+//			pstmt.setString(4, "%" + searchKey + "%");
+//			pstmt.setString(5, "%" + searchKey + "%");
+//			try (ResultSet rst = pstmt.executeQuery()) {
+//				while (rst.next()) {
+//					Student student = new Student();
+//					student.setId(rst.getString("id"));
+//					student.setName(rst.getString("name"));
+//					student.setGender(rst.getString("gender"));
+//					student.setAge(rst.getString("age"));
+//					student.setOrigin(rst.getString("origin"));
+//					student.setArea(rst.getString("area"));
+//					student.setCredit(rst.getString("credit"));
+//					stuList.add(student);
+//				}
+//			}
+//		} catch (SQLException se) {
+//			se.printStackTrace();
+//			return null;
+//		}
+//		return stuList;
+//	}
 
-		ArrayList<Student> stuList = new ArrayList<Student>();
-		String sql = "SELECT *"
-				+ " FROM students WHERE stu_id like ? or name like ? or sex like ? or schoolYear like ? or speciality like ? "
-				+ orderBy + sqlLimit;
-		try (Connection conn = dataSource.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
-			pstmt.setString(1, "%" + searchKey + "%");
-			pstmt.setString(2, "%" + searchKey + "%");
-			pstmt.setString(3, "%" + searchKey + "%");
-			pstmt.setString(4, "%" + searchKey + "%");
-			pstmt.setString(5, "%" + searchKey + "%");
-			try (ResultSet rst = pstmt.executeQuery()) {
-				while (rst.next()) {
-					Student student = new Student();
-					student.setStu_id(rst.getString("stu_id"));
-					student.setName(rst.getString("name"));
-					student.setSex(rst.getString("sex"));
-					student.setSpeciality(rst.getString("speciality"));
-					student.setSchoolYear(rst.getString("schoolYear"));
-					student.setEmail(rst.getString("email"));
-					student.setTel(rst.getString("tel"));
-					stuList.add(student);
-				}
-			}
-		} catch (SQLException se) {
-			se.printStackTrace();
-			return null;
-		}
-		return stuList;
-	}
-
-	public Student findById(String stu_id) {
+	public Student findById(String id) {
 		Student student = new Student();
-		String sql = "SELECT *" + " FROM students WHERE stu_id = ? ";
+		String sql = "SELECT *" + " FROM xujy_Students WHERE xjy_id = ? ";
 		try (Connection conn = dataSource.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
-			pstmt.setString(1, stu_id);
+			pstmt.setString(1, id);
 			try (ResultSet rst = pstmt.executeQuery()) {
 				if (rst.next()) {
-					student.setStu_id(rst.getString("stu_id"));
-					student.setName(rst.getString("name"));
-					student.setSex(rst.getString("sex"));
-					student.setSpeciality(rst.getString("speciality"));
-					student.setSchoolYear(rst.getString("schoolYear"));
-					student.setEmail(rst.getString("email"));
-					student.setTel(rst.getString("tel"));
+					student.setId(rst.getString("xjy_id"));
+					student.setName(rst.getString("xjy_name"));
+					student.setGender(rst.getString("xjy_gender"));
+					student.setAge(rst.getString("xjy_age"));
+					student.setOrigin(rst.getString("xjy_origin"));
+					student.setArea(rst.getString("xjy_area"));
+					student.setCredit(rst.getString("xjy_credit"));
+					student.setClaId(rst.getString("xjy_claId"));
 				}
 			}
 		} catch (SQLException se) {
@@ -141,21 +121,21 @@ public class StudentDao extends BaseDao {
 		return student;
 	}
 
-	// 查询所有客户信息
 	public ArrayList<Student> findAllStudent() {
 		ArrayList<Student> stuList = new ArrayList<Student>();
-		String sql = "SELECT * FROM students " + orderBy + sqlLimit;
+		String sql = "SELECT * FROM xujy_Students ";
 		try (Connection conn = dataSource.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			ResultSet rst = pstmt.executeQuery();
 			while (rst.next()) {
 				Student student = new Student();
-				student.setStu_id(rst.getString("stu_id"));
-				student.setName(rst.getString("name"));
-				student.setSex(rst.getString("sex"));
-				student.setSpeciality(rst.getString("speciality"));
-				student.setSchoolYear(rst.getString("schoolYear"));
-				student.setEmail(rst.getString("email"));
-				student.setTel(rst.getString("tel"));
+				student.setId(rst.getString("xjy_id"));
+				student.setName(rst.getString("xjy_name"));
+				student.setGender(rst.getString("xjy_gender"));
+				student.setAge(rst.getString("xjy_age"));
+				student.setOrigin(rst.getString("xjy_origin"));
+				student.setArea(rst.getString("xjy_area"));
+				student.setCredit(rst.getString("xjy_credit"));
+				student.setClaId(rst.getString("xjy_claId"));
 				stuList.add(student);
 			}
 			return stuList;
@@ -165,10 +145,10 @@ public class StudentDao extends BaseDao {
 		}
 	}
 
-	public boolean deleteStudent(String custName) {
-		String sql = "delete from students where stu_id=?";
+	public boolean deleteStudent(String id) {
+		String sql = "delete from xujy_Students where xjy_id=?";
 		try (Connection conn = dataSource.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
-			pstmt.setString(1, custName);
+			pstmt.setString(1, id);
 			if (pstmt.executeUpdate() == 1)
 				return true;
 			else
@@ -180,16 +160,17 @@ public class StudentDao extends BaseDao {
 	}
 
 	public boolean updateStudent(Student student) {
-		String sql = "update students set stu_id=? ,name=? ,sex=? ,speciality=?,schoolYear=?, tel=?,email=?  where stu_id=?";
+		String sql = "update xujy_Students set xjy_id=?,xjy_name=?,xjy_gender=?,xjy_age=?,xjy_origin=?,xjy_area=?,xjy_credit=?,xjy_claId=?  where xjy_id=?";
 		try (Connection conn = dataSource.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
-			pstmt.setString(1, student.getStu_id());
+			pstmt.setString(1, student.getId());
 			pstmt.setString(2, student.getName());
-			pstmt.setString(3, student.getSex());
-			pstmt.setString(4, student.getSpeciality());
-			pstmt.setString(5, student.getSchoolYear());
-			pstmt.setString(6, student.getTel());
-			pstmt.setString(7, student.getEmail());
-			pstmt.setString(8, student.getStu_id());
+			pstmt.setString(3, student.getGender());
+			pstmt.setString(4, student.getAge());
+			pstmt.setString(5, student.getOrigin());
+			pstmt.setString(6, student.getArea());
+			pstmt.setString(7, student.getCredit());
+			pstmt.setString(8, student.getClaId());
+			pstmt.setString(9, student.getId());
 			pstmt.executeUpdate();
 			return true;
 		} catch (SQLException se) {
@@ -197,5 +178,9 @@ public class StudentDao extends BaseDao {
 			return false;
 		}
 	}
+	
+	
+	
+	
 
 }

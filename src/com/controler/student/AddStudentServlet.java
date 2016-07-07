@@ -36,22 +36,22 @@ public class AddStudentServlet extends HttpServlet {
 		Student student = new Student();
 		String message = null;
 		try {
-			student.setStu_id(request.getParameter("stu_id"));
-   	    	student.setName(request.getParameter("name"));
-   	    	student.setSex(request.getParameter("sex"));
-   	    	student.setSpeciality(request.getParameter("speciality"));
-   	    	student.setSchoolYear(request.getParameter("schoolYear"));
-   	    	student.setEmail(request.getParameter("email"));
-   	    	student.setTel(request.getParameter("tel"));
+			student.setId(request.getParameter("id"));
+			student.setName(request.getParameter("name"));
+			student.setGender(request.getParameter("gender"));
+			student.setAge(request.getParameter("age"));
+			student.setOrigin(request.getParameter("origin"));
+			student.setArea(request.getParameter("area"));
+			student.setCredit(request.getParameter("credit"));
 			boolean success = dao.addStudent(student);
 			if (success) {
-				message = "<li>成功插入一条记录！</li>";
+				message = "鎴愬姛";
 				
 			} else {
-				message = "<li>插入记录错误！</li>";
+				message = "澶辫触";
 			}
 		} catch (Exception e) {
-			message = "<li>插入记录错误！</li>";
+			message = "寮傚父";
 		}
 		finally{
 			request.setAttribute("result", message);

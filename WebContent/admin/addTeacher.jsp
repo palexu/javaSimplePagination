@@ -10,13 +10,13 @@
 </head>
 <body>
 	<div class="container">
-		<%@ include file="./WEB-INF/header.html"%>
+		<%@ include file="../WEB-INF/header.html"%>
 		<a class="btn " href="studentManager.jsp"><span aria-hidden="true">&larr;</span>返回</a>
 		<form action="addStudent.do" method="post" class="form-horizontal">
 			<div class="form-group">
-				<label for="inputEmail3" class="col-sm-2 control-label">学号</label>
+				<label for="inputEmail3" class="col-sm-2 control-label">教师号</label>
 				<div class="col-sm-10">
-					<input type="text" name="stu_id">
+					<input type="text" name="id">
 				</div>
 			</div>
 			<div class="form-group">
@@ -28,26 +28,22 @@
 			<div class="form-group">
 				<label for="inputEmail3" class="col-sm-2 control-label">性别</label>
 				<div class="col-sm-10">
-					<select name="sex">
-					<option value="男">男</option>
-					<option value="女">女</option>
+					<select name="gender">
+						<option value="男">男</option>
+						<option value="女">女</option>
 					</select>
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="inputEmail3" class="col-sm-2 control-label">专业</label>
+				<label for="inputEmail3" class="col-sm-2 control-label">年龄</label>
 				<div class="col-sm-10">
-					<input type="text" name="speciality">
+					<input type="text" name="age">
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="inputEmail3" class="col-sm-2 control-label">入学年份</label>
+				<label for="inputEmail3" class="col-sm-2 control-label">职位</label>
 				<div class="col-sm-10">
-					<select name="schoolYear">
-					<c:forEach var="i" begin="2012" end="2020">
-					<option value="<c:out value="${i}"/>"><c:out value="${i}"/></option>
-					</c:forEach>
-					</select>
+					<input type="text" name="position">
 				</div>
 			</div>
 			<div class="form-group">
@@ -56,13 +52,6 @@
 					<input type="text" name="tel">
 				</div>
 			</div>
-			<div class="form-group">
-				<label for="inputEmail3" class="col-sm-2 control-label">邮件</label>
-				<div class="col-sm-10">
-					<input type="text" name="email">
-				</div>
-			</div>
-			<input type="hidden" name="q" value="i">
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10">
 					<button type="submit" class="btn btn-default">确认</button>
