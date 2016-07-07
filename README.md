@@ -1,3 +1,2 @@
-# javaSimplePagination
-a simple pagination, use bootstrap and java
-# 使用java写的一个简单的分页组件
+用javaweb写的数据库大型试验
+zjut2016 
