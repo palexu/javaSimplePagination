@@ -137,6 +137,7 @@ public class StudentDao extends BaseDao {
 				student.setCredit(rst.getString("xjy_credit"));
 				student.setClaId(rst.getString("xjy_claId"));
 				stuList.add(student);
+				System.out.println("find");
 			}
 			return stuList;
 		} catch (SQLException e) {
@@ -162,14 +163,25 @@ public class StudentDao extends BaseDao {
 	public boolean updateStudent(Student student) {
 		String sql = "update xujy_Students set xjy_id=?,xjy_name=?,xjy_gender=?,xjy_age=?,xjy_origin=?,xjy_area=?,xjy_credit=?,xjy_claId=?  where xjy_id=?";
 		try (Connection conn = dataSource.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
-			pstmt.setString(1, student.getId());
-			pstmt.setString(2, student.getName());
-			pstmt.setString(3, student.getGender());
-			pstmt.setString(4, student.getAge());
-			pstmt.setString(5, student.getOrigin());
-			pstmt.setString(6, student.getArea());
-			pstmt.setString(7, student.getCredit());
-			pstmt.setString(8, student.getClaId());
+			Student old=findById(student.getId());
+			
+			String Id=student.getId();
+			String Name=student.getName().equals(old.getName())? old.getName()  : student.getName();
+			String Gender=student.getGender().equals(old.getGender())? old.getGender()  : student.getGender();
+			String Age=student.getAge().equals(old.getAge())? old.getAge()  : student.getAge();
+			String Origin=student.getOrigin().equals(old.getOrigin())? old.getOrigin()  : student.getOrigin();
+			String Area=student.getArea().equals(old.getArea())? old.getArea()  : student.getArea();
+			String Credit=old.getCredit();
+			String ClaId=old.getClaId();
+			
+			pstmt.setString(1, Id);
+			pstmt.setString(2, Name);
+			pstmt.setString(3, Gender);
+			pstmt.setString(4, Age);
+			pstmt.setString(5, Origin);
+			pstmt.setString(6, Area);
+			pstmt.setString(7, Credit);
+			pstmt.setString(8, ClaId);
 			pstmt.setString(9, student.getId());
 			pstmt.executeUpdate();
 			return true;

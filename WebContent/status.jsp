@@ -11,7 +11,7 @@
 <body>
 	<div class="container">
 		<%@ include file="./WEB-INF/header.html"%>
-		<div class="alert alert-success" role="alert">操作成功，2s后跳转</div>
+		<div class="alert alert-success" role="alert">操作成功，2s后跳转 <a href="findStudent.do">或者点击此处立即跳转</a></div>
 	</div>
 </body>
 </html>

@@ -9,15 +9,16 @@
 </head>
 <body>
 	<div class="container">
-		<%@ include file="./WEB-INF/header.html"%>
-		<form action="updateStudent.do" method="post" class="form-horizontal">
+		<%@ include file="../WEB-INF/header.html"%>
+		<form action="updateStudent.do" method="post"
+			class="form-horizontal">
 			<div class="form-group">
 				<label for="inputEmail3" class="col-sm-2 control-label">学号</label>
 				<div class="col-sm-10">
-					<input type="text"  value="${student.stu_id}" disabled>
+					<input type="text" value="${student.id}" disabled>
 				</div>
 			</div>
-			<input type="hidden" name="stu_id" value="${student.stu_id}"/>
+			<input type="hidden" name="id" value="${student.id}" />
 			<div class="form-group">
 				<label for="inputEmail3" class="col-sm-2 control-label">姓名</label>
 				<div class="col-sm-10">
@@ -27,31 +28,28 @@
 			<div class="form-group">
 				<label for="inputEmail3" class="col-sm-2 control-label">性别</label>
 				<div class="col-sm-10">
-					<input type="text" name="sex" value="${student.sex}">
+					<select name="gender">
+						<option value="男">男</option>
+						<option value="女">女</option>
+					</select>
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="inputEmail3" class="col-sm-2 control-label">专业</label>
+				<label for="inputEmail3" class="col-sm-2 control-label">年龄</label>
 				<div class="col-sm-10">
-					<input type="text" name="speciality" value="${student.speciality}">
+					<input type="text" name="age" value="${student.age}">
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="inputEmail3" class="col-sm-2 control-label">入学年份</label>
+				<label for="inputEmail3" class="col-sm-2 control-label">生源地</label>
 				<div class="col-sm-10">
-					<input type="text" name="schoolYear" value="${student.schoolYear}">
+					<input type="text" name="origin" value="${student.origin}">
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="inputEmail3" class="col-sm-2 control-label">电话</label>
+				<label for="inputEmail3" class="col-sm-2 control-label">地区</label>
 				<div class="col-sm-10">
-					<input type="text" name="tel" value="${student.tel}">
-				</div>
-			</div>
-			<div class="form-group">
-				<label for="inputEmail3" class="col-sm-2 control-label">邮件</label>
-				<div class="col-sm-10">
-					<input type="text" name="email" value="${student.email}">
+					<input type="text" name="area" value="${student.area}">
 				</div>
 			</div>
 			<input type="hidden" name="q" value="m">

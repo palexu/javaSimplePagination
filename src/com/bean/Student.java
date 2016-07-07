@@ -9,6 +9,12 @@ public class Student {
 	String area;
 	String credit;
 	String claId;
+	
+	@Override
+	public String toString() {
+		return "Student [id=" + id + ", name=" + name + ", gender=" + gender + ", age=" + age + ", origin=" + origin
+				+ ", area=" + area + ", credit=" + credit + ", claId=" + claId + "]";
+	}
 	public String getClaId() {
 		return claId;
 	}

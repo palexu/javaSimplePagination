@@ -12,7 +12,7 @@
 	<div class="container">
 		<%@ include file="../WEB-INF/header.html"%>
 		<a class="btn " href="studentManager.jsp"><span aria-hidden="true">&larr;</span>返回</a>
-		<form action="addStudent.do" method="post" class="form-horizontal">
+		<form action="../addStudent.do" method="post" class="form-horizontal">
 			<div class="form-group">
 				<label for="inputEmail3" class="col-sm-2 control-label">学号</label>
 				<div class="col-sm-10">
@@ -53,38 +53,12 @@
 				</div>
 			</div>
 			<input type="hidden" name="credit" value="0">
-			<%-- <div class="form-group">
-				<label for="inputEmail3" class="col-sm-2 control-label">入学年份</label>
-				<div class="col-sm-10">
-					<select name="schoolYear">
-						<c:forEach var="i" begin="2012" end="2020">
-							<option value="<c:out value="${i}"/>"><c:out
-									value="${i}" /></option>
-						</c:forEach>
-					</select>
-				</div>
-			</div> --%>
-			<!-- <div class="form-group">
-				<label for="inputEmail3" class="col-sm-2 control-label">电话</label>
-				<div class="col-sm-10">
-					<input type="text" name="tel">
-				</div>
-			</div> -->
-			<!-- <div class="form-group">
-				<label for="inputEmail3" class="col-sm-2 control-label">邮件</label>
-				<div class="col-sm-10">
-					<input type="text" name="email">
-				</div>
-			</div> -->
-			<!-- <input type="hidden" name="q" value="i"> -->
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10">
 					<button type="submit" class="btn btn-default">确认</button>
 				</div>
 			</div>
 		</form>
-
-
 	</div>
 
 </body>

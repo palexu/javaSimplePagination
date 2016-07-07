@@ -43,16 +43,15 @@ public class DeleteStudentServlet extends HttpServlet {
 		String stu_id=null;
 		String message = null;
 		try {
-			// 将传递来的字符串重新使用utf-8编码，以免产生乱码
 			stu_id=request.getParameter("stu_id");
 			boolean success = dao.deleteStudent(stu_id);
 			if (success) {
-				message = "<li>成功删除一条记录！</li>";
+				message = "";
 			} else {
-				message = "<li>删除记录错误！</li>";
+				message = "";
 			}
 		} catch (Exception e) {
-			message = "<li>删除记录错误！</li>";
+			message = "";
 		}
 		request.setAttribute("result", message);
 		RequestDispatcher rd = getServletContext().getRequestDispatcher("/status.jsp");

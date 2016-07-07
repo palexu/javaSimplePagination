@@ -9,5 +9,5 @@
       maxWaitMillis="-1"
       driverClassName="com.mysql.jdbc.Driver"
       password="123456"
-      url="jdbc:mysql://localhost:3306/javaweb?useUnicode=true&amp;characterEncoding=UTF-8"/>
+      url="jdbc:mysql://localhost:3306/xujunyu01MIS?useUnicode=true&amp;characterEncoding=UTF-8"/>
 </Context>

@@ -12,7 +12,7 @@
 	<div class="container">
 		<%@ include file="../WEB-INF/header.html"%>
 		<a class="btn " href="studentManager.jsp"><span aria-hidden="true">&larr;</span>返回</a>
-		<form action="addStudent.do" method="post" class="form-horizontal">
+		<form action="../addTeacher.do" method="post" class="form-horizontal">
 			<div class="form-group">
 				<label for="inputEmail3" class="col-sm-2 control-label">教师号</label>
 				<div class="col-sm-10">
