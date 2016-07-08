@@ -4,7 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
-<title>我的班级平均成绩</title>
+<title>学生列表</title>
 <style>
 </style>
 <link href="./css/bootstrap.min.css" rel="stylesheet">
@@ -15,16 +15,18 @@
 		<table class="table table-hover table-bordered">
 			<tr>
 				<a class="btn " href="studentManager.jsp"><span aria-hidden="true">&larr;</span>返回</a>
-				<td>班级</td>
+				<td>学号</td>
+				<td>姓名</td>
 				<td>课程</td>
-				<td>平均成绩</td>
+				<td>成绩</td>
 			</tr>
-			<c:forEach var="ob" items="${requestScope.all}">
+			<c:forEach var="student" items="${requestScope.all}">
 				<tr>
 					<%--用EL访问作用域变量的成员--%>
-					<td>${ob.claId}</td>
-					<td>${ob.couName}</td>
-					<td>${ob.avgGrade}</td>
+					<td>${student.stuId}</td>
+					<td>${student.stuName}</td>
+					<td>${student.couName}</td>
+					<td>${student.grade}</td>
 				</tr>
 			</c:forEach>
 		</table>

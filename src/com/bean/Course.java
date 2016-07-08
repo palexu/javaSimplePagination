@@ -6,6 +6,21 @@ public class Course {
 	String credit;
 	String checkType;
 	String period;
+	String teaName;
+	String claId;
+	
+	public String getClaId() {
+		return claId;
+	}
+	public void setClaId(String claId) {
+		this.claId = claId;
+	}
+	public String getTeaName() {
+		return teaName;
+	}
+	public void setTeaName(String teaName) {
+		this.teaName = teaName;
+	}
 	public String getId() {
 		return id;
 	}

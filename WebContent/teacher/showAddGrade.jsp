@@ -7,7 +7,7 @@
 <title>学生列表</title>
 <style>
 </style>
-<link href="../css/bootstrap.min.css" rel="stylesheet">
+<link href="./css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 	<div class="container">
@@ -21,14 +21,14 @@
 				<td>成绩</td>
 				<td>修改成绩</td>
 			</tr>
-			<c:forEach var="student" items="${requestScope.stuList}">
+			<c:forEach var="student" items="${requestScope.all}">
 				<tr>
 					<%--用EL访问作用域变量的成员--%>
-					<td>${student.id}</td>
-					<td>${student.name}</td>
+					<td>${student.stuId}</td>
+					<td>${student.stuName}</td>
 					<td>${student.couName}</td>
 					<td>${student.grade}</td>
-					<td><a href="updateStudent.do?q=toM&id=${student.id}">录入/修改成绩</a></td>
+					<td><a href="gradeTransfer.do?stuId=${student.stuId}&couId=${student.couId}&teaId=${student.teaId}">录入/修改成绩</a></td>
 				</tr>
 			</c:forEach>
 		</table>

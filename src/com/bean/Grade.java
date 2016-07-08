@@ -53,5 +53,10 @@ public class Grade {
 	public void setTeaName(String teaName) {
 		this.teaName = teaName;
 	}
+	@Override
+	public String toString() {
+		return "Grade [stuId=" + stuId + ", couId=" + couId + ", teaId=" + teaId + ", grade=" + grade + ", teaName="
+				+ teaName + ", stuName=" + stuName + ", couName=" + couName + "]";
+	}
 	
 }
