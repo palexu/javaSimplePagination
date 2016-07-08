@@ -29,22 +29,21 @@ public class GradeDao extends BaseDao {
 			pstmt.executeUpdate();
 			return true;
 		} catch (SQLException se) {
-			// se.printStackTrace();
+//			 se.printStackTrace();
 			return false;
 		}
 	}
 
 	public boolean updateGrade(Grade grade) {
-		String sql = "update xujy_Grades set xjy_couId=?,xjy_teaId=?,xjy_grade=? where xjy_stuId=? ";
+		String sql = "update xujy_Grades set xjy_grade=? where xjy_stuId=? and xjy_couId=?";
 		try (Connection conn = dataSource.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
-			pstmt.setString(1, grade.getCouId());
-			pstmt.setString(2, grade.getTeaId());
-			pstmt.setString(3, grade.getGrade());
-			pstmt.setString(4, grade.getStuId());
+			pstmt.setString(1, grade.getGrade());
+			pstmt.setString(2, grade.getStuId());
+			pstmt.setString(3, grade.getCouId());
 			pstmt.executeUpdate();
 			return true;
 		} catch (SQLException se) {
-			// se.printStackTrace();
+//			 se.printStackTrace();
 			return false;
 		}
 	}
@@ -249,45 +248,48 @@ public class GradeDao extends BaseDao {
 		return list;
 	}
 
-	/**
-	 * 算法待优化 合并两个list
-	 * 
-	 * @param teaId
-	 * @param couId
-	 * @return
-	 */
-	public ArrayList<Grade> getList(String teaId, String couId) {
-		ArrayList<Grade> all = findAllStudents(teaId, couId);
-		ArrayList<Grade> has = findStudentsHasGrade(teaId, couId);
-		for (int i = 0; i < has.size(); i++) {
-			all.add(has.get(i));
-		}
-		all.sort(new CustomComparator());
-		for (int i = 0; i < all.size() - 1; i++) {
-			for (int j = all.size() - 1; j > i; j--) {
-				if (all.get(j).getStuId().equals(all.get(i).getStuId())) {
-					all.remove(i);
-				}
-			}
-		}
-		return all;
-	}
+//	/**
+//	 * 算法待优化 合并两个list
+//	 * 
+//	 * @param teaId
+//	 * @param couId
+//	 * @return
+//	 */
+//	public ArrayList<Grade> getList(String teaId, String couId) {
+//		ArrayList<Grade> all = findAllStudents(teaId, couId);
+//		ArrayList<Grade> has = findStudentsHasGrade(teaId, couId);
+//		for (int i = 0; i < has.size(); i++) {
+//			all.add(has.get(i));
+//		}
+//		all.sort(new CustomComparator());
+//		for (int i = 0; i < all.size() - 1; i++) {
+//			for (int j = all.size() - 1; j > i; j--) {
+//				if (all.get(j).getStuId().equals(all.get(i).getStuId())) {
+//					all.remove(i);
+//				}
+//			}
+//		}
+//		return all;
+//	}
 	
 	public ArrayList<Grade> getList(String teaId, String couId,String claId) {
-		ArrayList<Grade> all = findAllStudents(teaId, couId,claId);
 		ArrayList<Grade> has = findStudentsHasGrade(teaId,couId,claId);
-		for (int i = 0; i < has.size(); i++) {
-			all.add(has.get(i));
-		}
-		all.sort(new CustomComparator());
-		for (int i = 0; i < all.size() - 1; i++) {
-			for (int j = all.size() - 1; j > i; j--) {
-				if (all.get(j).getStuId().equals(all.get(i).getStuId())) {
-					all.remove(i);
+		ArrayList<Grade> all = findAllStudents(teaId, couId,claId);
+		ArrayList<Grade> newList=new ArrayList<Grade>();
+		for(int i=0;i<all.size();i++){
+			//对all中每个元素，查看是否在has中已有,如果没有，则将它放到newList中
+			boolean hasSame=false;
+			for(int j=0;j<has.size();j++){
+				if(all.get(i).getStuId().equals(has.get(j).getStuId())){
+					hasSame=true;
 				}
 			}
+			if(!hasSame){
+				newList.add(all.get(i));
+			}
 		}
-		return all;
+		has.addAll(newList);
+		return has;
 	}
 	
 	public ArrayList<Grade> findStudentsHasGradeAsc(String teaId, String couId) {
