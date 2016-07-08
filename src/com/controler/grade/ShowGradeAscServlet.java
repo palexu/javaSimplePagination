@@ -10,12 +10,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.bean.Grade;
+import com.bean.Teacher;
 import com.dao.GradeDao;
 
 /**
  * Servlet implementation class GetGradeOrderBy
  */
-@WebServlet("/GetGradeOrderBy")
+@WebServlet("/getGradeOrderBy.do")
 public class ShowGradeAscServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -32,11 +33,9 @@ public class ShowGradeAscServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-//		String teaId=request.getParameter("teaId");
-//		String couId=request.getParameter("couId");
-		
-		String teaId="01";
-		String couId="0001";
+		Teacher t = (Teacher) request.getSession().getAttribute("user");
+		String teaId = t.getId();
+		String couId = request.getParameter("couId");
 		
 		GradeDao d=new GradeDao();
 		ArrayList<Grade> all=d.findStudentsHasGradeAsc(teaId, couId);

@@ -11,10 +11,10 @@
 </head>
 <body>
 	<div class="container">
-		<%@ include file="./WEB-INF/header.html"%>
+		<%@ include file="../WEB-INF/header.html"%>
 		<table class="table table-hover table-bordered">
 			<tr>
-				<a class="btn " href="studentManager.jsp"><span aria-hidden="true">&larr;</span>返回</a>
+				<a class="btn " href="student/studentManager.jsp"><span aria-hidden="true">&larr;</span>返回</a>
 				<td>学号</td>
 				<td>姓名</td>
 				<td>性别</td>
@@ -40,7 +40,6 @@
 				</tr>
 			</c:forEach>
 		</table>
-		<%@ include file="./WEB-INF/pagination.jsp"%>
 	</div>
 
 </body>

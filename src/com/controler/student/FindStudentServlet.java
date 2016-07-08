@@ -47,7 +47,7 @@ public class FindStudentServlet extends HttpServlet {
 		ArrayList<Student> stuList=new ArrayList<Student>();
 		stuList=dao.findAllStudent();
 		request.setAttribute("stuList", stuList);
-		request.getRequestDispatcher("student.jsp").forward(request, response);;
+		request.getRequestDispatcher("student/student.jsp").forward(request, response);;
 		
 	}
 

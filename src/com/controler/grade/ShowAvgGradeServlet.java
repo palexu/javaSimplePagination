@@ -10,41 +10,47 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.bean.AvgGrade;
+import com.bean.Teacher;
 import com.dao.GradeDao;
 
 /**
  * Servlet implementation class ShowAvgGradeServlet
  */
-@WebServlet("/ShowAvgGradeServlet")
+@WebServlet("/showAvgGrade.do")
 public class ShowAvgGradeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ShowAvgGradeServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public ShowAvgGradeServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-//		String teaId=(String) request.getSession().getAttribute("teaId");
-		String teaId="01";
-		GradeDao d=new GradeDao();
-		ArrayList<AvgGrade> list=d.getClassAvgGrade(teaId);
+		Teacher t = (Teacher) request.getSession().getAttribute("user");
+		String teaId = t.getId();
+		String couId = request.getParameter("couId");
+		GradeDao d = new GradeDao();
+		ArrayList<AvgGrade> list = d.getClassAvgGrade(teaId);
 		request.setAttribute("all", list);
 		request.getRequestDispatcher("/teacher/queryAvgGrade.jsp").forward(request, response);
 		return;
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}

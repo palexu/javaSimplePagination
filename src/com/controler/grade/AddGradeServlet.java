@@ -45,7 +45,10 @@ public class AddGradeServlet extends HttpServlet {
 		if(!d.addGrade(g)){
 			d.updateGrade(g);
 		}
-		response.sendRedirect("showAddGrade.do");
+		request.removeAttribute("stuId");
+		request.removeAttribute("grade");
+		response.sendRedirect("showAddGrade.do?couId="+couId+"&id="+teaId);
+		return;
 		
 	}
 

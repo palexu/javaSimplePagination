@@ -29,10 +29,10 @@ public class QueryGradeServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-//		String stuId=request.getParameter("id");
-//		String openSchoolTerm=request.getParameter("openSchoolTerm");
-		String stuId="201426810501";
-		String openSchoolTerm="2015";
+		String stuId=request.getParameter("id");
+		String openSchoolTerm=request.getParameter("openSchoolTerm");
+//		String stuId="201426810501";
+//		String openSchoolTerm="2015";
 		
 		StudentDao s=new StudentDao();
 		request.setAttribute("list",s.getGradeList(stuId, openSchoolTerm));

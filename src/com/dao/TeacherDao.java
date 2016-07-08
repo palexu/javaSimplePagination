@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.bean.Course;
+import com.bean.Student;
 import com.bean.Teacher;
 
 public class TeacherDao extends BaseDao{
@@ -50,5 +51,43 @@ public class TeacherDao extends BaseDao{
 			return null;
 		}
 		return list;
+	}
+	
+	public Teacher findById(String id) {
+		Teacher tea = new Teacher();
+		String sql = "SELECT *" + " FROM xujy_Teachers WHERE xjy_id = ? ";
+		try (Connection conn = dataSource.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, id);
+			try (ResultSet rst = pstmt.executeQuery()) {
+				if (rst.next()) {
+					tea.setId(rst.getString("xjy_id"));
+					tea.setName(rst.getString("xjy_name"));
+					tea.setAge(rst.getString("xjy_age"));
+					tea.setGender(rst.getString("xjy_gender"));
+					tea.setPosition(rst.getString("xjy_position"));
+					tea.setTel(rst.getString("xjy_tel"));
+				}
+			}
+		} catch (SQLException se) {
+			se.printStackTrace();
+			return null;
+		}
+		return tea;
+	}
+	
+	public Teacher login(String id,String password){
+		String sql = "select * from xujy_Teachers where xjy_id=? and password=?";
+		try (Connection conn = dataSource.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, id);
+			pstmt.setString(2, password);
+			ResultSet rst = pstmt.executeQuery();
+			while (rst.next()) {
+				return findById(id);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		return null;
 	}
 }

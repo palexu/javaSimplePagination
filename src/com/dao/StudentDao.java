@@ -276,4 +276,20 @@ public class StudentDao extends BaseDao {
 		}
 		return list;
 	}
+	
+	public Student login(String id,String password){
+		String sql = "select * from xujy_Students where xjy_id=? and password=?";
+		try (Connection conn = dataSource.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, id);
+			pstmt.setString(2, password);
+			ResultSet rst = pstmt.executeQuery();
+			while (rst.next()) {
+				return findById(id);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		return null;
+	}
 }

@@ -12,7 +12,7 @@ import com.dao.StudentDao;
 /**
  * Servlet implementation class QueryCourseServlet
  */
-@WebServlet("/QueryCourseServlet")
+@WebServlet("/queryCourse.do")
 public class QueryCourseServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -29,10 +29,10 @@ public class QueryCourseServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-//		String stuId=request.getParameter("stuId");
-//		String openSchoolTerm=request.getParameter("openSchoolTerm");
-		String stuId="201426810501";
-		String openSchoolTerm="2015";
+		String stuId=request.getParameter("id");
+		String openSchoolTerm=request.getParameter("openSchoolTerm");
+//		String stuId="201426810501";
+//		String openSchoolTerm="2015";
 		StudentDao d=new StudentDao();
 		request.setAttribute("list", d.getCourseList(stuId, openSchoolTerm));
 		request.getRequestDispatcher("student/course.jsp").forward(request,response);

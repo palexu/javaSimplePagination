@@ -32,11 +32,11 @@ public class ShowAddGreadServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-//		String teaId=request.getParameter("teaId");
-//		String couId=request.getParameter("couId");
+		String teaId=request.getParameter("id");
+		String couId=request.getParameter("couId");
 		
-		String teaId="01";
-		String couId="0001";
+//		String teaId="01";
+//		String couId="0001";
 		
 		GradeDao d=new GradeDao();
 		ArrayList<Grade> all=d.getList(teaId, couId);

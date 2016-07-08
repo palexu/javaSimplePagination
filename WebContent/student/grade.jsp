@@ -14,7 +14,7 @@
 		<%@ include file="../WEB-INF/header.html"%>
 		<table class="table table-hover table-bordered">
 			<tr>
-				<a class="btn " href="studentManager.jsp"><span aria-hidden="true">&larr;</span>返回</a>
+				<a class="btn " href="student/studentManager.jsp"><span aria-hidden="true">&larr;</span>返回</a>
 				<td>课程名称</td>
 				<td>课程成绩</td>
 				<td>任课教师</td>
