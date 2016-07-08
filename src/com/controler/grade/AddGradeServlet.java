@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.bean.Grade;
 import com.dao.GradeDao;
+import com.dao.StudentDao;
 
 /**
  * Servlet implementation class AddGradeServlet
@@ -34,6 +35,7 @@ public class AddGradeServlet extends HttpServlet {
 		String teaId=request.getParameter("teaId");
 		String stuId=request.getParameter("stuId");
 		String grade=request.getParameter("grade");
+		String claId=request.getParameter("claId");
 		
 		Grade g=new Grade();
 		g.setCouId(couId);
@@ -42,12 +44,17 @@ public class AddGradeServlet extends HttpServlet {
 		g.setGrade(grade);
 		
 		GradeDao d=new GradeDao();
-		if(!d.addGrade(g)){
+		if(d.addGrade(g)){//添加成功，增加学分
+			StudentDao s=new StudentDao();
+			s.addCredit(stuId, couId);
+		}else{
 			d.updateGrade(g);
 		}
 		request.removeAttribute("stuId");
 		request.removeAttribute("grade");
-		response.sendRedirect("showAddGrade.do?couId="+couId+"&id="+teaId);
+		String str="showAddGrade.do?id="+teaId+"&info="+couId+":"+claId;
+		System.out.println(str);
+		response.sendRedirect(str);
 		return;
 		
 	}

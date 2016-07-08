@@ -60,7 +60,7 @@ public class LoginServlet extends HttpServlet {
 				return;
 			} else {
 				request.getSession().setAttribute("user", t);
-				response.sendRedirect("teacher/teacherManager.jsp");
+				response.sendRedirect("teacher/teacherManager");
 				return;
 			}
 		}else if (userType.equals("admin")) {

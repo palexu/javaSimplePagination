@@ -32,12 +32,13 @@ public class TransferServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String stuId=request.getParameter("stuId");
-		String couId=request.getParameter("couId");
+		String couId=request.getParameter("info").split(":")[0];
+		String claId=request.getParameter("info").split(":")[1];
 		String teaId=request.getParameter("teaId");
 		
 		GradeDao d=new GradeDao();
 		Grade g=d.findStudent(teaId, couId, stuId);
-		
+		g.setClaId(claId);
 		HttpSession session=request.getSession();
 		session.setAttribute("grade", g);
 		response.sendRedirect("teacher/addGrade.jsp");

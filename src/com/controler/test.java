@@ -1,29 +1,25 @@
-package com.controler.grade;
+package com.controler;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.bean.Grade;
-import com.bean.Teacher;
-import com.dao.GradeDao;
+import com.dao.StudentDao;
 
 /**
- * Servlet implementation class GetGradeOrderBy
+ * Servlet implementation class test
  */
-@WebServlet("/getGradeOrderBy.do")
-public class ShowGradeAscServlet extends HttpServlet {
+@WebServlet("/test")
+public class test extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ShowGradeAscServlet() {
+    public test() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,17 +29,8 @@ public class ShowGradeAscServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		Teacher t = (Teacher) request.getSession().getAttribute("user");
-		String teaId = t.getId();
-		String[] info = request.getParameter("info").split("&");
-		String couId=info[0];
-		String claId=info[1];
-		
-		GradeDao d=new GradeDao();
-		ArrayList<Grade> all=d.findStudentsHasGradeAsc(teaId, couId,claId);
-		request.setAttribute("all", all);
-		request.getRequestDispatcher("/student/showGradeOrderBy.jsp").forward(request, response);
-		return;
+		StudentDao s=new StudentDao();
+		s.addCredit("201426810508", "0001");
 	}
 
 	/**

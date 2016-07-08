@@ -61,7 +61,7 @@ public class GradeDao extends BaseDao {
 	 */
 	public ArrayList<AvgGrade> getClassAvgGrade(String teaId) {
 		ArrayList<AvgGrade> list = new ArrayList<AvgGrade>();
-		String sql = "select AVG(gra.xjy_grade) avgGrade,time.xjy_claId claId,cou.xjy_name couName from xujy_Grades as gra,xujy_SchoolTimeTable as time,xujy_Students as stu,xujy_Courses cou where time.xjy_claId=stu.xjy_claId and time.xjy_couId=gra.xjy_couId and gra.xjy_stuId=stu.xjy_id and time.xjy_couId=cou.xjy_id and time.xjy_teaId=? Group by time.xjy_claId ";
+		String sql = "select AVG(gra.xjy_grade) avgGrade,time.xjy_claId claId,cou.xjy_name couName from xujy_Grades as gra,xujy_SchoolTimeTable as time,xujy_Students as stu,xujy_Courses cou where time.xjy_claId=stu.xjy_claId and time.xjy_couId=gra.xjy_couId and gra.xjy_stuId=stu.xjy_id and time.xjy_couId=cou.xjy_id and time.xjy_teaId=? Group by time.xjy_claId,time.xjy_couId ";
 		try (Connection conn = dataSource.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			pstmt.setString(1, teaId);
 			ResultSet rs = pstmt.executeQuery();
@@ -113,6 +113,37 @@ public class GradeDao extends BaseDao {
 				g.setTeaName(rs.getString("teaName"));
 				g.setStuName(rs.getString("stuName"));
 				g.setCouName(rs.getString("couName"));
+				list.add(g);
+			}
+		} catch (SQLException se) {
+			se.printStackTrace();
+			return null;
+		}
+		return list;
+	}
+	
+	public ArrayList<Grade> findAllStudents(String teaId, String couId,String claId) {
+		ArrayList<Grade> list = new ArrayList<Grade>();
+		String sql = " select stu.xjy_id stuId,stu.xjy_name stuName,cou.xjy_id couId,cou.xjy_name couName,tea.xjy_id "
+				+ " teaId,tea.xjy_name teaName,0 grade "
+				+ " from xujy_SchoolTimeTable as time,xujy_Students as stu,xujy_Teachers as tea,xujy_Courses as cou "
+				+ " where stu.xjy_claId=time.xjy_claId " + " and   tea.xjy_id=time.xjy_teaId "
+				+ " and   cou.xjy_id=time.xjy_couId " + " and   time.xjy_teaId=?	" + " and   time.xjy_couId=? and time.xjy_claId=?";// 取出该老师该课程的学生成绩信息,并组合后放置到grade中
+		try (Connection conn = dataSource.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, teaId);
+			pstmt.setString(2, couId);
+			pstmt.setString(3, claId);
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				Grade g = new Grade();
+				g.setStuId(rs.getString("stuId"));
+				g.setCouId(rs.getString("couId"));
+				g.setTeaId(rs.getString("teaId"));
+				g.setGrade(rs.getString("grade"));
+				g.setTeaName(rs.getString("teaName"));
+				g.setStuName(rs.getString("stuName"));
+				g.setCouName(rs.getString("couName"));
+				g.setClaId(claId);
 				list.add(g);
 			}
 		} catch (SQLException se) {
@@ -181,6 +212,34 @@ public class GradeDao extends BaseDao {
 				g.setTeaName(rs.getString("teaName"));
 				g.setStuName(rs.getString("stuName"));
 				g.setCouName(rs.getString("couName"));
+				
+				list.add(g);
+			}
+		} catch (SQLException se) {
+			se.printStackTrace();
+			return null;
+		}
+		return list;
+	}
+	
+	public ArrayList<Grade> findStudentsHasGrade(String teaId, String couId,String claId) {
+		ArrayList<Grade> list = new ArrayList<Grade>();
+		String sql = "select stu.xjy_id stuId,stu.xjy_name stuName,cou.xjy_id couId,cou.xjy_name couName,tea.xjy_id teaId,tea.xjy_name teaName,gra.xjy_grade grade from xujy_Grades as gra,xujy_Teachers as tea,xujy_Courses as cou,xujy_Students as stu where gra.xjy_stuId=stu.xjy_id and gra.xjy_teaId=tea.xjy_id and gra.xjy_couId=cou.xjy_id and gra.xjy_teaId=? and gra.xjy_couId=? and stu.xjy_claId=?";
+		try (Connection conn = dataSource.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, teaId);
+			pstmt.setString(2, couId);
+			pstmt.setString(3, claId);
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				Grade g = new Grade();
+				g.setStuId(rs.getString("stuId"));
+				g.setCouId(rs.getString("couId"));
+				g.setTeaId(rs.getString("teaId"));
+				g.setGrade(rs.getString("grade"));
+				g.setTeaName(rs.getString("teaName"));
+				g.setStuName(rs.getString("stuName"));
+				g.setCouName(rs.getString("couName"));
+				g.setClaId(claId);
 				list.add(g);
 			}
 		} catch (SQLException se) {
@@ -214,12 +273,55 @@ public class GradeDao extends BaseDao {
 		return all;
 	}
 	
+	public ArrayList<Grade> getList(String teaId, String couId,String claId) {
+		ArrayList<Grade> all = findAllStudents(teaId, couId,claId);
+		ArrayList<Grade> has = findStudentsHasGrade(teaId,couId,claId);
+		for (int i = 0; i < has.size(); i++) {
+			all.add(has.get(i));
+		}
+		all.sort(new CustomComparator());
+		for (int i = 0; i < all.size() - 1; i++) {
+			for (int j = all.size() - 1; j > i; j--) {
+				if (all.get(j).getStuId().equals(all.get(i).getStuId())) {
+					all.remove(i);
+				}
+			}
+		}
+		return all;
+	}
+	
 	public ArrayList<Grade> findStudentsHasGradeAsc(String teaId, String couId) {
 		ArrayList<Grade> list = new ArrayList<Grade>();
 		String sql = "select stu.xjy_id stuId,stu.xjy_name stuName,cou.xjy_id couId,cou.xjy_name couName,tea.xjy_id teaId,tea.xjy_name teaName,gra.xjy_grade grade from xujy_Grades as gra,xujy_Teachers as tea,xujy_Courses as cou,xujy_Students as stu where gra.xjy_stuId=stu.xjy_id and gra.xjy_teaId=tea.xjy_id and gra.xjy_couId=cou.xjy_id and gra.xjy_teaId=? and gra.xjy_couId=? order by grade desc";
 		try (Connection conn = dataSource.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			pstmt.setString(1, teaId);
 			pstmt.setString(2, couId);
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				Grade g = new Grade();
+				g.setStuId(rs.getString("stuId"));
+				g.setCouId(rs.getString("couId"));
+				g.setTeaId(rs.getString("teaId"));
+				g.setGrade(rs.getString("grade"));
+				g.setTeaName(rs.getString("teaName"));
+				g.setStuName(rs.getString("stuName"));
+				g.setCouName(rs.getString("couName"));
+				list.add(g);
+			}
+		} catch (SQLException se) {
+			se.printStackTrace();
+			return null;
+		}
+		return list;
+	}
+	
+	public ArrayList<Grade> findStudentsHasGradeAsc(String teaId, String couId,String claId) {
+		ArrayList<Grade> list = new ArrayList<Grade>();
+		String sql = "select stu.xjy_id stuId,stu.xjy_name stuName,cou.xjy_id couId,cou.xjy_name couName,tea.xjy_id teaId,tea.xjy_name teaName,gra.xjy_grade grade from xujy_Grades as gra,xujy_Teachers as tea,xujy_Courses as cou,xujy_Students as stu where gra.xjy_stuId=stu.xjy_id and gra.xjy_teaId=tea.xjy_id and gra.xjy_couId=cou.xjy_id and gra.xjy_teaId=? and gra.xjy_couId=? and stu.xjy_claId=? order by grade desc";
+		try (Connection conn = dataSource.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, teaId);
+			pstmt.setString(2, couId);
+			pstmt.setString(3, claId);
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
 				Grade g = new Grade();

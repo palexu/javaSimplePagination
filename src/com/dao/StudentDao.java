@@ -276,8 +276,8 @@ public class StudentDao extends BaseDao {
 		}
 		return list;
 	}
-	
-	public Student login(String id,String password){
+
+	public Student login(String id, String password) {
 		String sql = "select * from xujy_Students where xjy_id=? and password=?";
 		try (Connection conn = dataSource.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			pstmt.setString(1, id);
@@ -292,4 +292,31 @@ public class StudentDao extends BaseDao {
 		}
 		return null;
 	}
+
+	public Student addCredit(String stuId, String couId) {
+		String sql = "update xujy_Students  set xjy_credit=xjy_credit+( select xjy_credit  from xujy_Courses where xjy_id=? ) where xjy_id=? ";
+		try (Connection conn = dataSource.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, couId);
+			pstmt.setString(2, stuId);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		return null;
+	}
+	
+	public Student decCredit(String stuId, String couId) {
+		String sql = "update xujy_Students  set xjy_credit=xjy_credit-( select xjy_credit  from xujy_Courses where xjy_id=? ) where xjy_id=? ";
+		try (Connection conn = dataSource.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, couId);
+			pstmt.setString(2, stuId);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		return null;
+	}
+
 }

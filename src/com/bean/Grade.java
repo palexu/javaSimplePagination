@@ -11,6 +11,14 @@ public class Grade {
 	String stuName;
 	String couName;
 	
+	String claId;
+	
+	public String getClaId() {
+		return claId;
+	}
+	public void setClaId(String claId) {
+		this.claId = claId;
+	}
 	public String getStuId() {
 		return stuId;
 	}

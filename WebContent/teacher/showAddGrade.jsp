@@ -14,7 +14,7 @@
 		<%@ include file="../WEB-INF/header.html"%>
 		<table class="table table-hover table-bordered">
 			<tr>
-				<a class="btn " href="teacher/teacherManager.jsp"><span aria-hidden="true">&larr;</span>返回</a>
+				<a class="btn " href="teacher/teacherManager"><span aria-hidden="true">&larr;</span>返回</a>
 				<td>学号</td>
 				<td>姓名</td>
 				<td>课程</td>
@@ -28,7 +28,7 @@
 					<td>${student.stuName}</td>
 					<td>${student.couName}</td>
 					<td>${student.grade}</td>
-					<td><a href="gradeTransfer.do?stuId=${student.stuId}&couId=${student.couId}&teaId=${student.teaId}">录入/修改成绩</a></td>
+					<td><a href="gradeTransfer.do?stuId=${student.stuId}&teaId=${student.teaId}&info=${student.couId}:${student.claId}">录入/修改成绩</a></td>
 				</tr>
 			</c:forEach>
 		</table>

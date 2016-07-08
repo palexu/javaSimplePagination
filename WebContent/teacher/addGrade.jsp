@@ -52,6 +52,7 @@
 						<input type="hidden" name="couId" value="${grade.couId}">
 						<input type="hidden" name="teaId" value="${grade.teaId}">
 						<input type="hidden" name="stuId" value="${grade.stuId}">
+						<input type="hidden" name="claId" value="${grade.claId}">
 						
 						<div class="form-group">
 							<div class="col-sm-offset-2 col-sm-10">

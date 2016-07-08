@@ -1,29 +1,26 @@
-package com.controler.grade;
+package com.controler.teacher;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.bean.Grade;
 import com.bean.Teacher;
-import com.dao.GradeDao;
+import com.dao.TeacherDao;
 
 /**
- * Servlet implementation class GetGradeOrderBy
+ * Servlet implementation class TeacherManagerServlet
  */
-@WebServlet("/getGradeOrderBy.do")
-public class ShowGradeAscServlet extends HttpServlet {
+@WebServlet("/teacher/teacherManager")
+public class TeacherManagerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ShowGradeAscServlet() {
+    public TeacherManagerServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,17 +29,13 @@ public class ShowGradeAscServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		Teacher t = (Teacher) request.getSession().getAttribute("user");
-		String teaId = t.getId();
-		String[] info = request.getParameter("info").split("&");
-		String couId=info[0];
-		String claId=info[1];
-		
-		GradeDao d=new GradeDao();
-		ArrayList<Grade> all=d.findStudentsHasGradeAsc(teaId, couId,claId);
-		request.setAttribute("all", all);
-		request.getRequestDispatcher("/student/showGradeOrderBy.jsp").forward(request, response);
+		Teacher t=(Teacher) request.getSession().getAttribute("user");
+		String teaId=t.getId();
+//		String openSchoolTerm=request.getParameter("openSchoolTerm");
+		String openSchoolTerm="2015";
+		TeacherDao d=new TeacherDao();
+		request.setAttribute("list", d.getCourseList(teaId, openSchoolTerm));
+		request.getRequestDispatcher("teacherManager.jsp").forward(request,response);
 		return;
 	}
 

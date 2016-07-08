@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.bean.Grade;
+import com.bean.Teacher;
 import com.dao.GradeDao;
 
 /**
@@ -32,14 +33,17 @@ public class ShowAddGreadServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String teaId=request.getParameter("id");
-		String couId=request.getParameter("couId");
-		
+		Teacher t=(Teacher) request.getSession().getAttribute("user");
+		String teaId=t.getId();
+		String [] info=request.getParameter("info").split(":");
+		String couId=info[0];
+		String claId=info[1];
+		System.out.println("showaddgrade:"+claId);
 //		String teaId="01";
 //		String couId="0001";
 		
 		GradeDao d=new GradeDao();
-		ArrayList<Grade> all=d.getList(teaId, couId);
+		ArrayList<Grade> all=d.getList(teaId, couId,claId);
 		request.setAttribute("all", all);
 		request.getRequestDispatcher("/teacher/showAddGrade.jsp").forward(request, response);
 		return;
