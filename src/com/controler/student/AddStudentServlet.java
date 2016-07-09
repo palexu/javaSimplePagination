@@ -55,7 +55,7 @@ public class AddStudentServlet extends HttpServlet {
 		}
 		finally{
 			request.setAttribute("result", message);
-			RequestDispatcher rd = getServletContext().getRequestDispatcher("/status.jsp");
+			RequestDispatcher rd = getServletContext().getRequestDispatcher("/admin/status.jsp");
 			rd.forward(request, response);
 		}
 	}

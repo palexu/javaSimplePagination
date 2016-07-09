@@ -4,25 +4,25 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link href="./css/bootstrap.min.css" rel="stylesheet">
+<link href="../css/bootstrap.min.css" rel="stylesheet">
 <title>addStudent</title>
 </head>
 <body>
 	<div class="container">
 		<%@ include file="../WEB-INF/header.html"%>
-		<form action="updateStudent.do" method="post"
+		<form action="../updateStudent.do" method="post"
 			class="form-horizontal">
 			<div class="form-group">
 				<label for="inputEmail3" class="col-sm-2 control-label">学号</label>
 				<div class="col-sm-10">
-					<input type="text" value="${student.id}" disabled>
+					<input type="text" value="${user.id}" disabled>
 				</div>
 			</div>
-			<input type="hidden" name="id" value="${student.id}" />
+			<input type="hidden" name="id" value="${user.id}" />
 			<div class="form-group">
 				<label for="inputEmail3" class="col-sm-2 control-label">姓名</label>
 				<div class="col-sm-10">
-					<input type="text" name="name" value="${student.name}">
+					<input type="text" name="name" value="${user.name}">
 				</div>
 			</div>
 			<div class="form-group">
@@ -37,19 +37,19 @@
 			<div class="form-group">
 				<label for="inputEmail3" class="col-sm-2 control-label">年龄</label>
 				<div class="col-sm-10">
-					<input type="text" name="age" value="${student.age}">
+					<input type="text" name="age" value="${user.age}">
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="inputEmail3" class="col-sm-2 control-label">生源地</label>
 				<div class="col-sm-10">
-					<input type="text" name="origin" value="${student.origin}">
+					<input type="text" name="origin" value="${user.origin}">
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="inputEmail3" class="col-sm-2 control-label">地区</label>
 				<div class="col-sm-10">
-					<input type="text" name="area" value="${student.area}">
+					<input type="text" name="area" value="${user.area}">
 				</div>
 			</div>
 			<input type="hidden" name="q" value="m">

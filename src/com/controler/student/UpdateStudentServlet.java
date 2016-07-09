@@ -91,6 +91,7 @@ public class UpdateStudentServlet extends HttpServlet {
 			} catch (Exception e) {
 				message = "操作异常";
 			}
+			request.getSession().setAttribute("user", student);
 			request.setAttribute("result", message);
 			RequestDispatcher rd = getServletContext().getRequestDispatcher("/status.jsp");
 			rd.forward(request, response);

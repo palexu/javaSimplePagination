@@ -14,7 +14,6 @@
 		<%@ include file="../WEB-INF/header.html"%>
 		<table class="table table-hover table-bordered">
 			<tr>
-				<a class="btn " href="student/studentManager.jsp"><span aria-hidden="true">&larr;</span>返回</a>
 				<td>学号</td>
 				<td>姓名</td>
 				<td>性别</td>
@@ -22,8 +21,8 @@
 				<td>生源地</td>
 				<td>地区</td>
 				<td>学分</td>
-				<td>操作</td>
-				<td>删除</td>
+			<!-- 	<td>操作</td> -->
+				<!-- <td>删除</td> -->
 			</tr>
 			<c:forEach var="student" items="${requestScope.stuList}">
 				<tr>
@@ -35,8 +34,8 @@
 					<td>${student.origin}</td>
 					<td>${student.area}</td>
 					<td>${student.credit}</td>
-					<td><a href="updateStudent.do?q=toM&id=${student.id}">修改</a></td>
-					<td><a href="deleteStudent.do?stu_id=${student.id}">删除</a></td>
+				<%-- 	<td><a href="updateStudent.do?q=toM&id=${student.id}">修改</a></td> --%>
+					<%-- <td><a href="deleteStudent.do?stu_id=${student.id}">删除</a></td> --%>
 				</tr>
 			</c:forEach>
 		</table>

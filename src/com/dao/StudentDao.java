@@ -318,5 +318,20 @@ public class StudentDao extends BaseDao {
 		}
 		return null;
 	}
+	
+	public String getCredit(String stuId){
+		String credit="";
+		String sql = "select xjy_credit credit from xujy_Students where xjy_id=? ";
+		try (Connection conn = dataSource.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, stuId);
+			ResultSet rs=pstmt.executeQuery();
+			if(rs.next())
+				credit=rs.getString("credit");
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		return credit;
+	}
 
 }

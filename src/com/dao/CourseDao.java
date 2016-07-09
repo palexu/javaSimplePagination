@@ -2,7 +2,9 @@ package com.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import com.bean.Course;
 
@@ -22,5 +24,31 @@ public class CourseDao extends BaseDao{
 			return false;
 		}
 	}
-
+	
+	/**
+	 * 查询所有学过的课程
+	 * @return
+	 */
+	public ArrayList<Course> getCoursesLearned(String stuId){
+		ArrayList<Course> list=new ArrayList<Course>();
+		String sql = "select cou.xjy_id couId,cou.xjy_name couName,cou.xjy_credit credit,cou.xjy_checkType checkType,cou.xjy_period period,stu.xjy_credit totalCredit from xujy_Courses as cou,xujy_Students as stu,xujy_Grades as gra where gra.xjy_stuId=stu.xjy_id and gra.xjy_couId=cou.xjy_id and gra.xjy_stuId=?";
+		try (Connection conn = dataSource.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, stuId);
+			ResultSet rs=pstmt.executeQuery();
+			while(rs.next()){
+				Course c=new Course();
+				c.setId(rs.getString("couId"));
+				c.setName(rs.getString("couName"));
+				c.setCredit(rs.getString("credit"));
+				c.setCheckType(rs.getString("checkType"));
+				c.setPeriod(rs.getString("period"));
+				c.setTotalCredit(rs.getString("totalCredit"));
+				list.add(c);
+			}
+		} catch (SQLException se) {
+			se.printStackTrace();
+			return null;
+		}
+		return list;
+	}
 }

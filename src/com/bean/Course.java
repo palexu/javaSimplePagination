@@ -9,6 +9,15 @@ public class Course {
 	String teaName;
 	String claId;
 	
+	String totalCredit;
+	
+	
+	public String getTotalCredit() {
+		return totalCredit;
+	}
+	public void setTotalCredit(String totalCredit) {
+		this.totalCredit = totalCredit;
+	}
 	public String getClaId() {
 		return claId;
 	}

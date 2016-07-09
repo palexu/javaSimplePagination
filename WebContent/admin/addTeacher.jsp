@@ -5,13 +5,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link href="./css/bootstrap.min.css" rel="stylesheet">
+<link href="../css/bootstrap.min.css" rel="stylesheet">
 <title>addStudent</title>
 </head>
 <body>
 	<div class="container">
 		<%@ include file="../WEB-INF/header.html"%>
-		<a class="btn " href="studentManager.jsp"><span aria-hidden="true">&larr;</span>返回</a>
+		<a class="btn " href="adminManager.jsp"><span aria-hidden="true">&larr;</span>返回</a>
 		<form action="../addTeacher.do" method="post" class="form-horizontal">
 			<div class="form-group">
 				<label for="inputEmail3" class="col-sm-2 control-label">教师号</label>

@@ -29,27 +29,55 @@ a {
 			<input id="search" type="text" name="search" placeholder="关键词">
 			<input type="submit" class="btn btn-info" value="搜索">
 		</form> -->
-		<h5>欢迎,${user.name}</h5>
-		<ul>
-			<form action="../queryStudentGrade.do">
-				<input type="hidden" name="id" value="${user.id}">
+		<div class="alert " role="alert">欢迎,${user.name}!</div>
+		<div class="col-md-8">
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<h3 class="panel-title">查询模块</h3>
+				</div>
+				<div class="panel-body">查询功能</div>
+				<ul class="list-group">
+					<li class="list-group-item">
+						<form class="form-inline" action="../queryStudentGrade.do">
+							<input type="hidden" name="id" value="${user.id}">
+							<div class="form-group input-group">
+								<span class="input-group-addon">学年</span> <select name="openSchoolTerm"
+									class="form-control">
+									<option value="2015">2015</option>
+									<option value="2016">2016</option>
+								</select>
+							</div>
+							<button type="submit" class="btn btn-primary">查询课程成绩</button>
+						</form>
+					</li>
+					<li class="list-group-item"><a href="../coursesLearned">查询已修学分</a></li>
+					<li class="list-group-item">
+						<form class="form-inline" action="../queryCourse.do">
+							<input type="hidden" name="id" value="${user.id}">
+							<div class="form-group input-group">
+								<span class="input-group-addon">学年</span> <select name="openSchoolTerm"
+									class="form-control">
+									<option value="2015">2015</option>
+									<option value="2016">2016</option>
+								</select>
+							</div>
+							<button type="submit" class="btn btn-primary">查询班级课表</button>
+						</form>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">个人管理</h3>
+				</div>
+				<div class="panel-body">
+					<a href="updateStudent.jsp">修改个人信息</a>
+				</div>
+			</div>
+		</div>
 
-				<select name="openSchoolTerm">
-					<option value="2015">2015</option>
-				</select>
-				<button type="submit" class="btn btn-primary">查询课程成绩</button>
-			</form>
-			<form action="../queryCourse.do">
-				<input type="hidden" name="id" value="${user.id}">
-
-				<select name="openSchoolTerm">
-					<option value="2015">2015</option>
-				</select>
-				<button type="submit" class="btn btn-primary">查询班级课表</button>
-			</form>
-			<a href="addStudent.jsp" class="btn btn-success">查询已修学分</a>	
-			<a>修改个人信息</a>
-		</ul>
 
 	</div>
 
